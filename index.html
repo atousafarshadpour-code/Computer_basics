@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>کامپیوتر چیست؟</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FFF7E6; --card:#FFFFFF; --ink:#2B2140; --accent:#3E6DF2;
+    --accent2:#FFB648; --good:#2CB67D; --bad:#F45B69; --line:#E7DFC9;
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-padding-top:env(safe-area-inset-top,0px); height:100%;}
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){--bg:#1B1730; --card:#241F3D; --ink:#F3EFFF; --line:#382F5C;}
+  }
+  :root[data-theme="dark"]{--bg:#1B1730; --card:#241F3D; --ink:#F3EFFF; --line:#382F5C;}
+  body{
+    margin:0; min-height:100%; color:var(--ink);
+    font-family:'Vazirmatn', Tahoma, sans-serif;
+    -webkit-font-smoothing:antialiased;
+    background:
+      radial-gradient(circle at 15% 8%, rgba(62,109,242,.35), transparent 45%),
+      radial-gradient(circle at 90% 15%, rgba(255,182,72,.30), transparent 40%),
+      radial-gradient(circle at 50% 90%, rgba(44,182,125,.25), transparent 45%),
+      var(--bg);
+    background-attachment:fixed;
+  }
+  .wrap{max-width:640px; margin:0 auto; padding:24px 18px 60px;}
+  h1{font-size:1.9rem; font-weight:900; margin:6px 0 4px; line-height:1.35;}
+  .lead{font-size:1.05rem; opacity:.85; margin:0 0 22px; line-height:1.9;}
+  .hero{
+    display:flex; align-items:center; justify-content:center; gap:14px;
+    font-size:3rem; margin-bottom:6px; user-select:none;
+  }
+  .hero svg{width:76px; height:76px;}
+  .bot-head{animation:bob 2.2s ease-in-out infinite;}
+  @keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(-6px);}}
+  .bot-eye{animation:blink 3.4s infinite;}
+  @keyframes blink{0%,92%,100%{transform:scaleY(1);}96%{transform:scaleY(.1);}}
+  .bot-antenna-light{animation:glow 1.4s ease-in-out infinite;}
+  @keyframes glow{0%,100%{opacity:.5; r:3;}50%{opacity:1; r:4.5;}}
+  section{margin:34px 0;}
+  h2{font-size:1.3rem; font-weight:900; margin:0 0 14px; display:flex; align-items:center; gap:8px;}
+  .eva{
+    display:flex; align-items:stretch; gap:6px; overflow-x:auto; padding:6px 2px 14px;
+  }
+  .eva .box{
+    flex:1 0 30%; background:var(--card); border:2px solid var(--line); border-radius:18px;
+    padding:16px 10px; text-align:center; opacity:0; transform:translateY(14px);
+    animation:rise .6s ease forwards;
+  }
+  .eva .box:nth-child(1){animation-delay:.1s;}
+  .eva .box:nth-child(3){animation-delay:.5s;}
+  .eva .box:nth-child(5){animation-delay:.9s;}
+  .eva .arrow{
+    display:flex; align-items:center; font-size:1.6rem; color:var(--accent); opacity:0;
+    animation:fadeIn .5s ease forwards;
+  }
+  .eva .arrow:nth-child(2){animation-delay:.4s;}
+  .eva .arrow:nth-child(4){animation-delay:.8s;}
+  @keyframes rise{to{opacity:1; transform:translateY(0);}}
+  @keyframes fadeIn{to{opacity:1;}}
+  .eva .box .ic{font-size:2.1rem; display:block; margin-bottom:6px;}
+  .eva .box .lb{font-weight:700; font-size:.95rem; display:block; margin-bottom:4px;}
+  .eva .box .ex{font-size:.8rem; opacity:.7;}
+  .summary-box{
+    background:var(--accent); color:#fff; border-radius:16px; padding:16px 18px;
+    font-weight:700; font-size:1.05rem; line-height:2;
+  }
+  .grid{
+    display:grid; grid-template-columns:repeat(2,1fr); gap:12px;
+  }
+  .card{
+    perspective:1000px; height:128px; cursor:pointer;
+  }
+  .card .inner{
+    position:relative; width:100%; height:100%; transition:transform .5s;
+    transform-style:preserve-3d;
+  }
+  .card.flipped .inner{transform:rotateY(180deg);}
+  .face{
+    position:absolute; inset:0; border-radius:16px; backface-visibility:hidden;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    padding:8px; text-align:center;
+  }
+  .front{background:var(--card); border:2px solid var(--line);}
+  .front .ic{
+    font-size:2.1rem; width:64px; height:44px; display:flex; align-items:center; justify-content:center;
+    background:linear-gradient(160deg,#161327,#2B2456);
+    border-radius:8px; border:2px solid #4C4A8A;
+    box-shadow:0 0 0 3px #0b0918 inset, 0 0 14px rgba(62,109,242,.55);
+    position:relative;
+    animation:iconPulse 2.6s ease-in-out infinite;
+  }
+  @keyframes iconPulse{
+    0%,100%{box-shadow:0 0 0 3px #0b0918 inset, 0 0 10px rgba(62,109,242,.4); transform:scale(1);}
+    50%{box-shadow:0 0 0 3px #0b0918 inset, 0 0 18px rgba(62,109,242,.75); transform:scale(1.04);}
+  }
+  .music-btn{
+    position:absolute; top:calc(16px + env(safe-area-inset-top,0px)); left:16px; z-index:10;
+    width:58px; height:58px; border-radius:50%; border:3px solid #fff; cursor:pointer;
+    background:linear-gradient(160deg,#FFB648,#FF8A5C); color:#fff; font-size:1.7rem;
+    box-shadow:0 4px 14px rgba(0,0,0,.3), 0 0 0 4px rgba(255,182,72,.35);
+    will-change:transform; display:flex; align-items:center; justify-content:center;
+  }
+  .music-btn .music-icon{display:inline-block; animation:musicBounce 1.8s ease-in-out infinite;}
+  @keyframes musicBounce{0%,100%{transform:scale(1);}50%{transform:scale(1.08);}}
+  .front .ic .badge{
+    position:absolute; top:-8px; left:-8px; background:#2CB67D; border-radius:50%;
+    width:20px; height:20px; display:flex; align-items:center; justify-content:center;
+    font-size:.7rem; box-shadow:0 0 8px rgba(44,182,125,.8); border:2px solid var(--card);
+  }
+  .front .ic::after{
+    content:""; position:absolute; inset:0; border-radius:6px;
+    background:radial-gradient(circle at 30% 20%, rgba(255,255,255,.18), transparent 60%);
+  }
+  .front .name{font-weight:700; margin-top:8px; font-size:.9rem;}
+  .back{transform:rotateY(180deg); color:#fff; font-size:.82rem; font-weight:700; line-height:1.6;}
+  .back.yes{background:var(--good);}
+  .back.no{background:var(--bad);}
+  .back .verdict{font-size:1.1rem; margin-bottom:4px;}
+  .hint{text-align:center; font-size:.85rem; opacity:.6; margin-top:10px;}
+  .progress{
+    text-align:center; font-weight:700; margin-top:16px; font-size:.95rem; opacity:.85;
+  }
+  footer{text-align:center; font-size:.8rem; opacity:.55; margin-top:40px;}
+  .watermark{
+    position:fixed; left:0; right:0; bottom:0; height:64px; z-index:0; pointer-events:none; user-select:none;
+    background-image:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNjAiIGhlaWdodD0iMTQwIj4KPHRleHQgeD0iMTMwIiB5PSI3NSIgZm9udC1mYW1pbHk9IlRhaG9tYSwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMCIgZm9udC13ZWlnaHQ9IjcwMCIgZmlsbD0iIzNFNkRGMiIgZmlsbC1vcGFjaXR5PSIwLjEwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiB0cmFuc2Zvcm09InJvdGF0ZSgtMTggMTMwIDc1KSI+2KLYqtmI2LPYpyDZgdix2LTYp9iv2b7ZiNixPC90ZXh0Pgo8L3N2Zz4K");
+    background-repeat:repeat-x; background-size:220px 64px; background-position:center;
+  }
+  .wrap{position:relative; z-index:1;}
+</style>
+</head>
+<body>
+<div class="watermark" aria-hidden="true"></div>
+<button id="musicBtn" class="music-btn" onclick="toggleMusic()"><span id="musicIcon" class="music-icon">🎵</span></button>
+<div class="wrap">
+  <div class="hero">
+    <svg class="bot-head" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+      <line x1="50" y1="8" x2="50" y2="22" stroke="#4C4A8A" stroke-width="4"/>
+      <circle class="bot-antenna-light" cx="50" cy="7" r="4" fill="#FFB648"/>
+      <rect x="20" y="22" width="60" height="50" rx="16" fill="#3E6DF2"/>
+      <rect x="28" y="30" width="44" height="30" rx="10" fill="#1B1730"/>
+      <ellipse class="bot-eye" cx="41" cy="45" rx="6" ry="7" fill="#7CE0FF"/>
+      <ellipse class="bot-eye" cx="59" cy="45" rx="6" ry="7" fill="#7CE0FF"/>
+      <rect x="12" y="38" width="8" height="16" rx="4" fill="#2CB67D"/>
+      <rect x="80" y="38" width="8" height="16" rx="4" fill="#2CB67D"/>
+      <rect x="34" y="76" width="10" height="14" rx="4" fill="#4C4A8A"/>
+      <rect x="56" y="76" width="10" height="14" rx="4" fill="#4C4A8A"/>
+    </svg>
+    💻📱
+  </div>
+  <h1>کامپیوتر چیست؟</h1>
+  <p class="lead">بیا با هم کشف کنیم کامپیوتر چطور کار می‌کند و چه چیزهایی را «کامپیوتر» می‌نامیم!</p>
+
+  <section>
+    <h2>🧠 کامپیوتر چطور فکر می‌کند؟</h2>
+    <div class="eva">
+      <div class="box"><span class="ic">⌨️</span><span class="lb">ورودی</span><span class="ex">مثلاً فشردن یک دکمه</span></div>
+      <div class="arrow">◀</div>
+      <div class="box"><span class="ic">⚙️</span><span class="lb">پردازش</span><span class="ex">کامپیوتر فکر می‌کند</span></div>
+      <div class="arrow">◀</div>
+      <div class="box"><span class="ic">🖥️</span><span class="lb">خروجی</span><span class="ex">نمایش روی صفحه</span></div>
+    </div>
+    <div class="summary-box">هر وسیله‌ای که بتواند اطلاعات بگیرد، روی آن فکر کند، و جواب بدهد؛ یک «کامپیوتر» است!</div>
+  </section>
+
+  <section>
+    <h2>🔍 بازی: این یک کامپیوتر است؟</h2>
+    <p class="lead" style="margin-bottom:14px;">روی هر کارت بزن تا جواب را ببینی 👇</p>
+    <div class="grid" id="grid"></div>
+    <p class="progress" id="progress"></p>
+  </section>
+
+  <footer><strong style="opacity:.85;">تهیه شده توسط: آتوسا فرشادپور</strong></footer>
+</div>
+
+<script>
+const items = [
+  {ic:"💻", name:"لپ‌تاپ", yes:true, why:"چون اطلاعات می‌گیرد، با مغزش فکر می‌کند و روی صفحه جواب نشان می‌دهد."},
+  {ic:"📚", name:"کتاب", yes:false, why:"چون فقط نوشته و عکس دارد و چیزی را حساب یا بررسی نمی‌کند."},
+  {ic:"🧸", name:"عروسک", yes:false, why:"چون هیچ اطلاعاتی نمی‌گیرد و خودش فکر نمی‌کند."},
+  {ic:"📱", name:"موبایل", yes:true, why:"چون لمس تو را می‌گیرد، بررسی می‌کند و روی صفحه جواب می‌دهد."},
+  {ic:"🚲", name:"دوچرخه", yes:false, why:"چون فقط با نیروی پای تو حرکت می‌کند و کاری بر اساس اطلاعات انجام نمی‌دهد."},
+  {ic:"⌚", name:"ساعت هوشمند", yes:true, why:"چون حرکت تو را می‌سنجد، حساب می‌کند و عدد قدم‌ها را نشان می‌دهد."},
+  {ic:"⚽", name:"توپ", yes:false, why:"چون فقط با ضربه حرکت می‌کند و چیزی را بررسی نمی‌کند."},
+  {ic:`<svg viewBox="0 0 44 34" width="40" height="30" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="3" width="40" height="28" rx="4" fill="#EDEBFF"/><rect x="5" y="6" width="26" height="22" rx="2" fill="#1B1730"/><rect x="8" y="9" width="20" height="16" rx="1" fill="none" stroke="#3E6DF2" stroke-width="1"/><line x1="10" y1="9" x2="10" y2="25" stroke="#3E6DF2" stroke-width=".6"/><line x1="14" y1="9" x2="14" y2="25" stroke="#3E6DF2" stroke-width=".6"/><line x1="18" y1="9" x2="18" y2="25" stroke="#3E6DF2" stroke-width=".6"/><line x1="22" y1="9" x2="22" y2="25" stroke="#3E6DF2" stroke-width=".6"/><line x1="26" y1="9" x2="26" y2="25" stroke="#3E6DF2" stroke-width=".6"/><rect x="34" y="8" width="6" height="18" rx="1.5" fill="#2CB67D"/><circle cx="37" cy="12" r="1.2" fill="#1B1730"/></svg>`, name:"مایکروویو", yes:true, why:"چون زمان و دما را می‌گیرد و بر اساس آن‌ها، گرم کردن غذا را کنترل می‌کند."},
+  {ic:"✏️", name:"مداد", yes:false, why:"چون فقط یک ابزار نوشتن است و خودش کاری انجام نمی‌دهد."},
+  {ic:`<svg viewBox="0 0 40 40" width="34" height="34" xmlns="http://www.w3.org/2000/svg"><rect x="5" y="4" width="30" height="32" rx="4" fill="#EDEBFF"/><rect x="9" y="7" width="22" height="4" rx="1.5" fill="#1B1730"/><circle cx="13" cy="9" r="1" fill="#2CB67D"/><circle cx="20" cy="24" r="10" fill="#1B1730"/><circle cx="20" cy="24" r="6.5" fill="none" stroke="#3E6DF2" stroke-width="1.4"/><circle cx="20" cy="24" r="3" fill="none" stroke="#3E6DF2" stroke-width="1"/></svg>`, name:"ماشین لباسشویی هوشمند", yes:true, smart:true, why:"چون نوع لباس‌ها را می‌سنجد و خودش برنامه‌ی شست‌وشو را انتخاب می‌کند."},
+  {ic:"🪑", name:"صندلی", yes:false, why:"چون وسیله‌ای است برای نشستن."},
+  {ic:`<svg viewBox="0 0 30 40" width="26" height="34" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="2" width="22" height="36" rx="3" fill="#EDEBFF"/><line x1="4" y1="16" x2="26" y2="16" stroke="#1B1730" stroke-width="1.4"/><rect x="8" y="5" width="10" height="7" rx="1" fill="#1B1730"/><circle cx="10" cy="8.5" r="1" fill="#2CB67D"/><rect x="22" y="6" width="1.6" height="6" rx=".8" fill="#3E6DF2"/><rect x="22" y="20" width="1.6" height="6" rx=".8" fill="#3E6DF2"/></svg>`, name:"یخچال هوشمند", yes:true, smart:true, why:"چون دمای داخلش را می‌سنجد و بر اساس آن، کار مناسب را انجام می‌دهد."},
+  {ic:"🪞", name:"آینه‌ی ساده", yes:false, why:"چون فقط نور را برمی‌گرداند و چیزی را حساب نمی‌کند."},
+  {ic:`<svg viewBox="0 0 30 40" width="26" height="34" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="2" width="24" height="36" rx="4" fill="#EDEBFF"/><rect x="6" y="6" width="18" height="26" rx="1.5" fill="#1B1730"/><circle cx="9" cy="10" r="1.6" fill="#3E6DF2"/><circle cx="15" cy="10" r="1.6" fill="#FFB648"/><circle cx="21" cy="10" r="1.6" fill="#2CB67D"/><circle cx="15" cy="35" r="1.6" fill="#1B1730"/></svg>`, name:"تبلت", yes:true, why:"چون مثل موبایل، لمس تو را می‌گیرد و بررسی می‌کند."},
+  {ic:"🕰️", name:"ساعت مچی ساده", yes:false, why:"چون فقط عقربه‌هایش حرکت می‌کنند و کاری بر اساس اطلاعات انجام نمی‌دهد."},
+  {ic:`<svg viewBox="0 0 48 36" width="42" height="32" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="2" width="44" height="26" rx="2" fill="#EDEBFF"/><rect x="4" y="4" width="40" height="22" rx="1" fill="#0B0918"/><rect x="7" y="7" width="9" height="7" rx="1.5" fill="#3E6DF2"/><rect x="19" y="7" width="9" height="7" rx="1.5" fill="#FFB648"/><rect x="31" y="7" width="9" height="7" rx="1.5" fill="#2CB67D"/><rect x="7" y="17" width="9" height="6" rx="1.5" fill="#F45B69"/><rect x="19" y="17" width="21" height="6" rx="1.5" fill="#4C4A8A"/><path d="M38 6 q2 -2 4 0" stroke="#7CE0FF" stroke-width="1" fill="none" stroke-linecap="round"/><path d="M39 7.3 q1 -1 2 0" stroke="#7CE0FF" stroke-width="1" fill="none" stroke-linecap="round"/><path d="M14 33 L34 33 L30 30 L18 30 Z" fill="#EDEBFF"/><rect x="20" y="28" width="8" height="3" fill="#EDEBFF"/></svg>`, name:"تلویزیون هوشمند", yes:true, why:"چون دستور تو یا اینترنت را می‌گیرد و بررسی می‌کند."},
+  {ic:"💡", name:"لامپ ساده", yes:false, why:"چون فقط روشن یا خاموش می‌شود و چیزی را بررسی نمی‌کند."},
+  {ic:`<svg viewBox="0 0 40 40" width="34" height="34" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="3" width="28" height="34" rx="4" fill="#EDEBFF"/><rect x="10" y="7" width="20" height="8" rx="2" fill="#1B1730"/><circle cx="13" cy="20" r="2.4" fill="#3E6DF2"/><circle cx="20" cy="20" r="2.4" fill="#3E6DF2"/><circle cx="27" cy="20" r="2.4" fill="#3E6DF2"/><circle cx="13" cy="27" r="2.4" fill="#3E6DF2"/><circle cx="20" cy="27" r="2.4" fill="#3E6DF2"/><circle cx="27" cy="27" r="2.4" fill="#FFB648"/><circle cx="13" cy="33" r="2.4" fill="#3E6DF2"/><circle cx="20" cy="33" r="2.4" fill="#3E6DF2"/><circle cx="27" cy="33" r="2.4" fill="#3E6DF2"/></svg>`, name:"ماشین‌حساب", yes:true, why:"چون عددها را می‌گیرد، حساب می‌کند و جواب را نشان می‌دهد."},
+  {ic:"🔪", name:"چاقو", yes:false, why:"چون فقط یک ابزار برای بریدن است."},
+  {ic:"🏧", name:"دستگاه خودپرداز", yes:true, why:"چون اطلاعات کارت را می‌خواند، حساب می‌کند و پول می‌دهد."},
+  {ic:"🫖", name:"کتری ساده", yes:false, why:"چون فقط آب را گرم می‌کند و کاری بر اساس اطلاعات انجام نمی‌دهد."},
+  {ic:"🚦", name:"چراغ راهنمایی هوشمند", yes:true, why:"چون تعداد ماشین‌ها را می‌سنجد و بر اساس آن، زمان چراغ را تنظیم می‌کند."},
+  {ic:"🧹", name:"جارو دستی", yes:false, why:"چون فقط با نیروی دست تو کار می‌کند."},
+  {ic:"🔊", name:"بلندگوی هوشمند", yes:true, why:"چون صدای تو را می‌شنود، بررسی می‌کند و جواب می‌دهد."},
+  {ic:"☂️", name:"چتر", yes:false, why:"چون فقط ما را از باران نگه می‌دارد."},
+  {ic:"🎮", name:"کنسول بازی", yes:true, why:"چون فشار دکمه‌ها را می‌گیرد و بازی را بررسی می‌کند."},
+  {ic:"👟", name:"کفش", yes:false, why:"چون فقط می‌پوشیمش و خودش فکر نمی‌کند."},
+  {ic:`<svg viewBox="0 0 48 30" width="42" height="26" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="carBody" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF8A5C"/><stop offset="1" stop-color="#E8483A"/></linearGradient></defs><rect x="4" y="14" width="40" height="10" rx="3" fill="url(#carBody)"/><path d="M10 14 L16 6 H32 L38 14 Z" fill="url(#carBody)"/><rect x="14" y="8" width="8" height="6" rx="1" fill="#1B1730"/><rect x="24" y="8" width="8" height="6" rx="1" fill="#1B1730"/><circle cx="13" cy="25" r="4" fill="#1B1730"/><circle cx="35" cy="25" r="4" fill="#1B1730"/><circle cx="24" cy="18" r="2" fill="#7CE0FF"/></svg>`, name:"خودروی مدرن", yes:true, smart:true, why:"چون سرعت و ترمز را می‌سنجد و بر اساس آن‌ها، کار مناسب برای ایمنی را انجام می‌دهد."}
+];
+
+const grid = document.getElementById('grid');
+const progress = document.getElementById('progress');
+let flippedCount = 0;
+
+items.forEach((item, i) => {
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.innerHTML = `
+    <div class="inner">
+      <div class="face front">
+        <span class="ic">${item.ic}${item.smart ? '<span class="badge">📶</span>' : ''}</span>
+        <span class="name">${item.name}</span>
+      </div>
+      <div class="face back ${item.yes ? 'yes' : 'no'}">
+        <span class="verdict">${item.yes ? '✅ کامپیوتر است' : '❌ کامپیوتر نیست'}</span>
+        <span>${item.why}</span>
+      </div>
+    </div>`;
+  card.addEventListener('click', () => {
+    if (!card.classList.contains('flipped')) {
+      flippedCount++;
+      progress.textContent = flippedCount + ' از ' + items.length + ' کارت را دیدی';
+    }
+    card.classList.toggle('flipped');
+  });
+  grid.appendChild(card);
+});
+progress.textContent = '0 از ' + items.length + ' کارت را دیدی';
+
+const musicBtnEl = document.getElementById('musicBtn');
+function pinMusicBtn(){
+  const y = window.scrollY || window.pageYOffset || 0;
+  musicBtnEl.style.transform = 'translateY(' + y + 'px)';
+}
+window.addEventListener('scroll', pinMusicBtn, {passive:true});
+window.addEventListener('resize', pinMusicBtn);
+pinMusicBtn();
+
+let audioCtx, gainMaster, melodyFilter, playing = false, step = 0, timer, scaleIdx = 2;
+const scale = [261.63,293.66,329.63,392.00,440.00,493.88,523.25,587.33,659.25,783.99];
+const bassNote = 98.00;
+function nextFreq(){
+  const move = Math.floor(Math.random()*5) - 2;
+  scaleIdx = Math.min(scale.length - 1, Math.max(0, scaleIdx + (move === 0 ? 1 : move)));
+  return scale[scaleIdx];
+}
+function ensureAudio(){
+  if(!audioCtx){
+    audioCtx = new (window.AudioContext||window.webkitAudioContext)();
+    gainMaster = audioCtx.createGain();
+    gainMaster.gain.value = 0.06;
+    melodyFilter = audioCtx.createBiquadFilter();
+    melodyFilter.type = 'lowpass';
+    melodyFilter.frequency.value = 1400;
+    melodyFilter.Q.value = 0.6;
+    melodyFilter.connect(gainMaster);
+    gainMaster.connect(audioCtx.destination);
+  }
+}
+function playTone(freq, type, dur, vol, node){
+  const osc = audioCtx.createOscillator();
+  const g = audioCtx.createGain();
+  osc.type = type;
+  osc.frequency.value = freq;
+  g.gain.setValueAtTime(0, audioCtx.currentTime);
+  g.gain.linearRampToValueAtTime(vol, audioCtx.currentTime + 0.03);
+  g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + dur);
+  osc.connect(g); g.connect(node);
+  osc.start(); osc.stop(audioCtx.currentTime + dur + 0.03);
+}
+function toggleMusic(){
+  ensureAudio();
+  if(audioCtx.state === 'suspended') audioCtx.resume();
+  const icon = document.getElementById('musicIcon');
+  if(!playing){
+    playing = true; icon.textContent = '🔊';
+    timer = setInterval(() => {
+      playTone(nextFreq(), 'triangle', 0.32, 0.45, melodyFilter);
+      if(step % 2 === 0) playTone(bassNote, 'sine', 0.4, 0.55, gainMaster);
+      step++;
+    }, 260);
+  } else {
+    playing = false; icon.textContent = '🎵';
+    clearInterval(timer);
+  }
+}
+</script>
+</body>
+</html>
